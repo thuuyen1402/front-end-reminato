@@ -16,10 +16,12 @@ export const useSocket = ({
         if (_mockSocket != null) return;
         const socketIo = io(url, {
             ...ops,
+            autoConnect: true
         });
         setSocket(socketIo);
 
         function cleanup() {
+
             socketIo.disconnect();
         }
         return cleanup;

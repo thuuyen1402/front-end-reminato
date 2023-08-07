@@ -13,9 +13,6 @@ export function ProviderNotification({ children, _mockSocket = null }: ProviderN
     const { isAuth, user } = authStore();
     const socket = useSocket({
         url: import.meta.env.VITE_SERVER_NOTIFY_API_URL,
-        ops: {
-            withCredentials: true,
-        },
         _mockSocket
     })
 
@@ -24,9 +21,8 @@ export function ProviderNotification({ children, _mockSocket = null }: ProviderN
             if (!socket?.connected) {
                 socket?.connect()
             }
-
+            
             socket?.on("new_video_sharing", (message: string) => {
-                console.log("12345")
                 try {
                     const video = JSON.parse(message) as NotifyServiceConsume;
 
